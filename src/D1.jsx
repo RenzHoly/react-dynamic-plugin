@@ -1,21 +1,14 @@
-import React from 'react';
+import React from 'react'
 
 class D1 extends React.Component {
-  constructor(){
+  constructor() {
     super()
-    console.log("loaded D1 constructor")
+    console.log('loaded D1 constructor')
   }
   render() {
-    console.log("rendering D1")
-    return (
-
-      <div>
-        D1 loaded from plugin
-      </div>
-
-    );
+    console.log('rendering D1')
+    return <div>D1 loaded from plugin</div>
   }
+}
 
-};
-
-export default D1;
+export default D1

@@ -1,8 +1,8 @@
-var webpack = require('webpack');
-var path = require('path');
+var webpack = require('webpack')
+var path = require('path')
 
-var BUILD_DIR = path.resolve(__dirname, 'dist');
-var APP_DIR = path.resolve(__dirname, 'src');
+var BUILD_DIR = path.resolve(__dirname, 'dist')
+var APP_DIR = path.resolve(__dirname, 'src')
 
 var config = {
   mode: 'development',
@@ -16,7 +16,7 @@ var config = {
     path: BUILD_DIR,
     filename: '[name].bundle.js',
     library: 'main',
-    libraryTarget:'window'
+    libraryTarget: 'window',
   },
   externals: {
     './vendor': 'vendor',
@@ -24,27 +24,27 @@ var config = {
       commonjs: 'react',
       commonjs2: 'react',
       amd: 'react',
-      window: 'React'
+      window: 'React',
     },
     'react-dom': {
       commonjs: 'react-dom',
       commonjs2: 'react-dom',
       amd: 'react-dom',
-      window: 'ReactDOM'
-    }
+      window: 'ReactDOM',
+    },
   },
-  module : {
-    rules : [
+  module: {
+    rules: [
       {
-        test : /\.jsx?/,
-        include : APP_DIR,
-        loader : 'babel-loader'
-      }
-    ]
+        test: /\.jsx?/,
+        include: APP_DIR,
+        loader: 'babel-loader',
+      },
+    ],
   },
   resolve: {
     extensions: ['.js', '.jsx'],
-  }
-};
+  },
+}
 
-module.exports = config;
+module.exports = config

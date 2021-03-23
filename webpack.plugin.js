@@ -1,5 +1,5 @@
-var path = require('path');
-var APP_DIR = path.resolve(__dirname, 'src');
+var path = require('path')
+var APP_DIR = path.resolve(__dirname, 'src')
 
 module.exports = {
   mode: 'development',
@@ -12,7 +12,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].plugin.js',
     library: 'D1plugin',
-    libraryTarget:'window'
+    libraryTarget: 'window',
   },
   externals: {
     './vendor': 'vendor',
@@ -20,19 +20,19 @@ module.exports = {
       commonjs: 'react',
       commonjs2: 'react',
       amd: 'react',
-      window: 'React'
-    }
+      window: 'React',
+    },
   },
-  module : {
-    rules : [
-        {
-            test : /\.jsx?/,
-            include : APP_DIR,
-            loader : 'babel-loader'
-        }
-    ]
+  module: {
+    rules: [
+      {
+        test: /\.jsx?/,
+        include: APP_DIR,
+        loader: 'babel-loader',
+      },
+    ],
   },
   optimization: {
     namedModules: true,
   },
-};
+}
