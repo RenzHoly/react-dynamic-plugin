@@ -1,42 +1,35 @@
-class App extends vendor.React.Component {
-  constructor() {
-    super()
-    this.state = {}
-    this.state.components = []
-    this.pluginRegistry = []
-  }
+import vendor from './vendor'
 
-  loadPlugins() {
-    fetch('./dist/' + this.state.pluginName + '.plugin.js')
+export default function App() {
+  const [pluginName, setPluginName] = vendor.React.useState('')
+  const [pluginRegistry, setPluginRegistry] = vendor.React.useState({})
+
+  const loadPlugins = vendor.React.useCallback(() => {
+    fetch('./dist/' + pluginName + '.plugin.js')
       .then((resp) => resp.text())
       .then((resp) => {
-        this.state.components.push(this.state.pluginName)
-        this.pluginRegistry[this.state.pluginName] = eval(resp).default
-        this.forceUpdate()
+        setPluginRegistry((old) => ({
+          ...old,
+          [pluginName]: eval(resp).default,
+        }))
       })
+  }, [pluginName])
 
-    this.forceUpdate()
-  }
-
-  render() {
-    return (
+  return (
+    <div>
+      <h2>Dynamic Components Loading</h2>
+      <input
+        type="text"
+        value={pluginName}
+        onChange={(e) => setPluginName(e.target.value)}
+        placeholder="Plugin Name D1,D2,...D4 etc"
+      />
+      <button onClick={loadPlugins}>Load</button>
       <div>
-        <h2>Dynamic Components Loading</h2>
-        <input
-          type="text"
-          onChange={(e) => (this.state.pluginName = e.target.value)}
-          placeholder="Plugin Name D1,D2,...D4 etc"
-        />
-        <button onClick={this.loadPlugins.bind(this)}>Load</button>
-        <div>
-          {this.state.components.map((componentId) => {
-            let Component = this.pluginRegistry[componentId]
-            return <Component>{componentId}</Component>
-          })}
-        </div>
+        {Object.entries(pluginRegistry).map(([componentId, Component]) => {
+          return <Component key={componentId}>{componentId}</Component>
+        })}
       </div>
-    )
-  }
+    </div>
+  )
 }
-
-export default App
